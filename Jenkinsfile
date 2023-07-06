@@ -1,12 +1,27 @@
-FROM linux:latest
-MAINTAINER rajashekharayya789@gmail.com
-RUN yum install -y httpd
-zip\
-unzip
-ADD https://www.free.css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html
-WORKDIR /var/www/html/
-RUN unzip photogenic.zip
-RUN cp -rvf photogenic/*.
-RUN rm -rf photogenic.zip photogenic
-CMD ["/usr/sbin/httpd" , "-D" , "FOREGROUND" ]
-EXPOSE 80
+node
+{
+    stage "1. update the system/machine"
+    sh "sudo yum update -y"
+    
+    stage "2. Install java on mentioned machine"
+    sh "sudo yum install -y java"
+    
+    stage "3. create a folder"
+    sh "mkdir -p marketing"
+    
+    stage "4. create file"
+    sh "touch index.html"
+    
+    stage "5. add the content to the file"
+    writeFile file:"marketing/output.txt", text:"this is the outputfile created"
+    
+    stage "6. show the status"
+    echo "show the status of the files"
+    
+    stage "7. view date and time and uptime"
+    sh "date"
+    sh "uptime"
+    sh "free -m"
+    sh "df -h"
+    sh "ls -al"
+}
